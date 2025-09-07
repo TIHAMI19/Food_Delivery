@@ -81,20 +81,13 @@ backend/routes/reviews.js
 frontend/src/components/restaurant/RatingStars.jsx
 frontend/src/components/restaurant/ReviewForm.jsx
 
+# 4. Dark mode / Light mode (UI context/theme only, not ignored)
+# (No files ignored for this feature, as you want to push it)
+
 # 5. Dine in and pick up service
-backend/controllers/orderController.js
-backend/models/Order.js
 backend/routes/orders.js
 
-# 6. Order status with notification update
-backend/controllers/orderController.js
-backend/models/Notification.js
-backend/routes/notifications.js
-frontend/src/components/orders/OrderTray.jsx
-frontend/src/components/ui/LoadingSpinner.jsx
-
 # 7. Schedule order for later
-backend/controllers/orderController.js
-backend/models/Order.js
+# (Assuming handled in order controller/model, but you want to keep order status/notification, so do not ignore these files)
 
 # Note: Adjust paths if you add more feature files.
