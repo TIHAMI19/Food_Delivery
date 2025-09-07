@@ -1,0 +1,64 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Optional npm cache
+.npm
+.cache
+
+# Logs
+logs
+*.log
+pids
+*.pid
+*.seed
+*.pid.lock
+
+
+
+# Build outputs
+dist/
+build/
+client/build/
+server/build/
+server/dist/
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Testing
+jest-cache/
+.vitest/
+
+# TypeScript
+*.tsbuildinfo
+
+# Bundlers / caches
+.cache/
+.parcel-cache/
+.next/
+.cache-loader/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# System files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Misc
+bower_components/
+jspm_packages/
+*.tgz
+*.log.*
