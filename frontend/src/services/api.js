@@ -146,6 +146,7 @@ export const notificationsAPI = {
 export const couponsAPI = {
   create: (data) => api.post(`/coupons`, data).then((r) => r.data), // admin
   list: () => api.get(`/coupons`).then((r) => r.data), // admin
+  delete: (id) => api.delete(`/coupons/${id}`).then((r) => r.data), // admin
   validate: ({ code, subtotal, restaurantId }) =>
     api
       .get(`/coupons/validate`, { params: { code, subtotal, restaurantId } })

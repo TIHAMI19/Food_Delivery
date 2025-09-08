@@ -53,3 +53,17 @@ export const validateCoupon = async (req, res) => {
     return res.status(500).json({ message: "Failed to validate coupon" })
   }
 }
+
+export const deleteCoupon = async (req, res) => {
+  try {
+  const errors = validationResult(req)
+  if (!errors.isEmpty()) return res.status(400).json({ message: "Validation failed", errors: errors.array() })
+    const { id } = req.params
+    const deleted = await Coupon.findByIdAndDelete(id)
+    if (!deleted) return res.status(404).json({ message: "Coupon not found" })
+    return res.json({ message: "Coupon deleted", id })
+  } catch (e) {
+    console.error("deleteCoupon error", e)
+    return res.status(500).json({ message: "Failed to delete coupon" })
+  }
+}

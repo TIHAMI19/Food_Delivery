@@ -1,7 +1,7 @@
 import express from "express"
-import { body, query } from "express-validator"
+import { body, query, param } from "express-validator"
 import { authenticate, authorize } from "../middleware/auth.js"
-import { createCoupon, listCoupons, validateCoupon } from "../controllers/couponController.js"
+import { createCoupon, listCoupons, validateCoupon, deleteCoupon } from "../controllers/couponController.js"
 
 const router = express.Router()
 
@@ -37,6 +37,15 @@ router.get(
     query("restaurantId").optional().isMongoId(),
   ],
   validateCoupon,
+)
+
+// Admin: delete coupon
+router.delete(
+  "/:id",
+  authenticate,
+  authorize("admin"),
+  [param("id").isMongoId()],
+  deleteCoupon,
 )
 
 export default router

@@ -83,6 +83,17 @@ export default function AdminCoupons() {
     }
   }
 
+  const onDelete = async (id, code) => {
+    const ok = window.confirm(`Delete coupon ${code}? This cannot be undone.`)
+    if (!ok) return
+    try {
+      await couponsAPI.delete(id)
+      setList((prev) => prev.filter((c) => c._id !== id))
+    } catch (e) {
+      alert(e.response?.data?.message || "Failed to delete coupon")
+    }
+  }
+
   return (
     <div className="max-w-5xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-4 text-gray-900 dark:text-gray-100">Coupons</h1>
@@ -168,6 +179,7 @@ export default function AdminCoupons() {
                   <th className="py-2 pr-4">Limit</th>
                   <th className="py-2 pr-4">Active</th>
                   <th className="py-2 pr-4">Expires</th>
+                  <th className="py-2 pr-4">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y dark:divide-gray-800">
@@ -182,6 +194,15 @@ export default function AdminCoupons() {
                     <td className="py-2 pr-4">{c.usageLimit || 0}</td>
                     <td className="py-2 pr-4">{c.isActive ? <span className="text-green-600">Yes</span> : <span className="text-gray-500">No</span>}</td>
                     <td className="py-2 pr-4">{c.expiresAt ? new Date(c.expiresAt).toLocaleString() : "–"}</td>
+                    <td className="py-2 pr-4">
+                      <button
+                        onClick={() => onDelete(c._id, c.code)}
+                        className="text-red-600 hover:text-red-700 font-medium"
+                        title="Delete coupon"
+                      >
+                        Delete
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
