@@ -37,12 +37,21 @@ const __dirname = path.dirname(__filename)
 
 // Security middleware
 app.use(helmet())
+
+// CORS origins (allow multiple via CORS_ORIGINS comma-separated)
+const extraCors = (process.env.CORS_ORIGINS || "")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean)
+const allowedOrigins = [
+  process.env.FRONTEND_URL || "http://localhost:3000",
+  "http://localhost:5173", // Vite default port
+  ...extraCors,
+]
+
 app.use(
   cors({
-    origin: [
-      process.env.FRONTEND_URL || "http://localhost:3000",
-      "http://localhost:5173", // Vite default port
-    ],
+    origin: allowedOrigins,
     credentials: true,
   }),
 )
@@ -115,7 +124,7 @@ app.use("*", (req, res) => {
 // Socket.IO setup
 const io = new SocketIOServer(httpServer, {
   cors: {
-    origin: [process.env.FRONTEND_URL || "http://localhost:3000", "http://localhost:5173"],
+    origin: allowedOrigins,
     credentials: true,
   },
 })
